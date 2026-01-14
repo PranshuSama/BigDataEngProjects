@@ -1,0 +1,115 @@
+{
+  "datasets": [
+    {
+      "name": "9a74ac87",
+      "displayName": "visualization",
+      "queryLines": [
+        "SELECT * FROM hive_metastore.default.visualization"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "a6426a7f",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "dffa937a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9a74ac87",
+                  "fields": [
+                    {
+                      "name": "day_name",
+                      "expression": "`day_name`"
+                    },
+                    {
+                      "name": "dep_hour",
+                      "expression": "`dep_hour`"
+                    },
+                    {
+                      "name": "AVG(avg(prediction))",
+                      "expression": "`AVG(avg(prediction))`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "dep_hour",
+                  "displayName": "hour of day",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "AVG(avg(prediction))",
+                  "displayName": "delay prediction",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "day_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": false
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 10,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "822e70d8",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "e9f4a4e9",
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {},
+              "frame": {
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
