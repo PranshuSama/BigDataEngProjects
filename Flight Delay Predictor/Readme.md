@@ -1,115 +1,95 @@
-# ✈️ Flight Delay Predictor
+✈️ US Flight Delay Predictor: Big Data Machine Learning Pipeline
+================================================================
 
-A machine learning project that predicts **flight delays** using historical flight data, airport information, and weather-related features.  
-The project covers the **complete ML lifecycle** — from data ingestion and EDA to model prediction, visualization, and dashboarding.
+**End-to-End Predictive Analytics on Databricks**
 
-🔗 Project Link:  
-https://github.com/PranshuSama/BigDataEngProjects/tree/main/Flight%20Delay%20Predictor
+📌 Project Overview
+-------------------
 
----
+This project processes a massive scale of **12.8 Million flight and weather records** to predict domestic flight delays in the United States. By integrating historical flight data with high-resolution NOAA weather datasets, this pipeline identifies the specific factors that trigger delays.
 
-## 📌 Project Objectives
-- Analyze historical flight delay patterns
-- Identify key factors influencing delays
-- Build a predictive model for flight delays
-- Visualize insights using plots and dashboards
-- Generate prediction outputs for further analysis
+The project successfully demonstrates that **Systemic Congestion** and **Departure Timing** (the "Snowball Effect") are significantly stronger predictors of delays than raw weather factors.
 
----
+🛠️ Technical Stack
+-------------------
 
-## 📂 Project Structure
+*   **Platform:** Databricks (Azure)
+    
+*   **Engine:** PySpark (Spark SQL & MLlib)
+    
+*   **Storage:** Delta Lake / DBFS
+    
+*   **Language:** Python / SQL
+    
 
-```text
-Flight Delay Predictor/
-├── Data/
-│   ├── airports.csv
-│   ├── flight_delay/
-│   │   ├── flight_data_2024.csv
-│   │   ├── flight_data_2024_sample.csv
-│   │   └── flight_data_2024_data_dictionary.csv
-│   └── usa_rain_prediction_dataset_2024_2025.csv
-│
-├── images/
-│   ├── feature_importance_bar.png
-│   ├── delay_distribution_bar.png
-│   └── prediction_scatter.png
-│
-├── Flight_Delay_Predictor.ipynb
-├── Feature Importance.csv
-├── Visualization.csv
-├── Visualization.lvdash.json
-├── feature_importance.lvdash.json
-├── prediction.csv
-├── prediction_with_probability.csv
-├── prediction_with_probability.lvdash.json
-└── flight_delay_predictor_dashboard.html
+🏗️ Data Engineering Pipeline
+-----------------------------
 
-📊 Visualizations
+### 1\. Multi-Source Ingestion & Cleaning
 
-🔹 Feature Importance
+*   Ingested and cleaned **12.8M+ rows** of disparate flight and NOAA weather data.
+    
+*   Resolved the **IATA-to-City mapping problem**, bridging 3-letter airport codes (JFK, LAX) with geographic weather station locations.
+    
 
-Displays the most influential features contributing to flight delays.
+### 2\. Feature Engineering (The "Signal" Boost)
 
-🔹 Delay Distribution
+*   **Airport Congestion:** Implemented **Spark Window Functions** to calculate real-time flight volume per airport per hour.
+    
+*   **Carrier Delay History:** Developed rolling averages of airline performance to capture operational efficiency.
+    
+*   **Time-of-Day Logic:** Vectorized departure hours to identify cumulative pressure on the national aviation system.
+    
 
-Shows the distribution of flight delays across the dataset.
+🤖 Machine Learning & Evaluation
+--------------------------------
 
-🔹 Prediction Scatter Plot
+*   **Algorithm:** Random Forest Classifier (100 Trees).
+    
+*   **Performance:** Achieved a **0.7033 ROC Score**.
+    
+*   **Class Balancing:** Applied under-sampling to the majority ("On-Time") class to ensure the model learned the specific signatures of delayed flights.
+    
+*   **Accuracy Metrics:** Reached a **0.6473 Precision and Recall** score, effectively catching 2/3 of all actual delays.
+    
 
-Visualizes predicted delay probability with respect to key operational and weather features.
+📊 Business Intelligence & Dashboarding
+---------------------------------------
 
-📈 Interactive Dashboard
+The final results were deployed into an interactive **Databricks Dashboard** to reveal hidden patterns in the data:
 
-An interactive dashboard is included to explore predictions and insights visually.
-	•	Dashboard File: flight_delay_predictor_dashboard.html
-	•	Dashboard Configurations: .lvdash.json files
+### **The "Snowball Effect"**
 
-The dashboard enables exploration of:
-	•	Feature importance
-	•	Delay probability trends
-	•	Time-based and weather-based patterns
+*   **Key Finding:** Delay probability increases by over **400%** between 8:00 AM and 8:00 PM, regardless of weather conditions.
+    
+*   **Feature Importance Breakdown:**
+    
+    *   **Departure Hour:** 48.6% (Systemic Pressure).
+        
+    *   **Carrier History:** 34.1% (Operational Efficiency).
+        
+    *   **Weather Factors:** < 1% (Trigger vs. Root Cause).
+        
 
-📓 Jupyter Notebook
+🚀 Key Takeaways
+----------------
 
-The complete workflow is implemented in:
+1.  **Scalability:** Demonstrated the ability to join, clean, and model datasets exceeding 12 million records in a distributed environment.
+    
+2.  **Strategic Insight:** Identified the **5:00 AM – 9:00 AM** window as the most reliable time for US air travel.
+    
+3.  **Deployment:** Saved the finalized "Champion Model" to **DBFS** for persistent inference and operational reporting.
+    
 
-📘 Flight_Delay_Predictor.ipynb
+### **How to Use This Repository**
 
-It includes:
-	•	Data loading and preprocessing
-	•	Exploratory Data Analysis (EDA)
-	•	Feature engineering
-	•	Model training and evaluation
-	•	Prediction generation
-	•	Visualization creation
+1.  **Notebooks:** Contains the Spark logic for Ingestion, Join Logic, and ML Training.
+    
+2.  **Models:** Documentation for loading the champion\_model\_v2 pipeline.
+    
+3.  **Visuals:** Includes exported PDF/HTML reports of the finalized Intelligence Dashboard.
+    
 
-⸻
+### **About the Author**
 
-🛠️ Tech Stack
-	•	Programming Language: Python
-	•	Data Analysis: Pandas, NumPy
-	•	Visualization: Matplotlib, Seaborn
-	•	Machine Learning: Scikit-learn
-	•	Notebook Environment: Jupyter Notebook
-	•	Version Control: Git & GitHub
-
-⸻
-
-🚀 How to Run the Project
-	1.	Clone the repository:
-      git clone https://github.com/PranshuSama/BigDataEngProjects.git
-
-  2.	Navigate to the project directory:
-      cd "Flight Delay Predictor"
-
-	3.	Open the notebook:
-      jupyter notebook Flight_Delay_Predictor.ipynb
-
-🔮 Future Enhancements
-	•	Hyperparameter tuning to improve model performance
-	•	Comparison with advanced models (Random Forest, XGBoost)
-	•	Real-time data ingestion
-	•	Deployment as a web application or API
-
-Thanks,
-Pranshu
+I am a Data Engineer and Machine Learning enthusiast with a passion for uncovering stories hidden within massive datasets. My background includes a strong interest in **Art and Sketching** (as seen on my art account **@pranshudraws**), which I use to create intuitive and visually compelling data stories.
