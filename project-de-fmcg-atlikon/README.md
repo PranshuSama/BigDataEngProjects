@@ -59,6 +59,92 @@ project-de-fmcg-atlikon
 │   └── test_data.py
 └── .gitignore
 ```
+---
+
+## 🗂️ Raw Data (Bronze Layer)
+
+The Bronze layer contains **raw, unprocessed CSV data** received from upstream source systems.  
+These datasets are **intentionally excluded from version control** and documented here to reflect **enterprise data engineering best practices**.
+
+Raw data is organized by **source company** and **load type (full vs incremental)**.
+
+---
+
+## 📌 Data Sources & Load Types
+
+| Source Company | Dataset Type | Load Type |
+|---------------|-------------|-----------|
+| Parent Company | Dimensions & Facts | Full Load |
+| Child Company  | Orders | Incremental Load |
+
+---
+
+## 👤 Customers (Raw)
+
+**Source:** Parent & Child Company  
+**Load Type:** Full Load  
+**Description:** Master data representing customer details.
+
+| Column Name | Description |
+|------------|-------------|
+| customer_id | Unique customer identifier |
+| customer_name | Customer name |
+| region | Sales region |
+| channel | Sales channel |
+
+---
+
+## 📦 Products (Raw)
+
+**Source:** Parent & Child Company  
+**Load Type:** Full Load  
+**Description:** Product master data used for sales analysis.
+
+| Column Name | Description |
+|------------|-------------|
+| product_id | Unique product identifier |
+| product_name | Product name |
+| category | Product category |
+| brand | Brand name |
+
+---
+
+## 💰 Pricing (Raw)
+
+**Source:** Parent Company  
+**Load Type:** Full Load  
+**Description:** Product pricing reference data.
+
+| Column Name | Description |
+|------------|-------------|
+| product_id | Product reference |
+| gross_price | Listed price |
+| effective_dt | Price effective date |
+
+---
+
+## 🧾 Orders (Raw)
+
+**Source:**  
+- Parent Company – Full Load (historical)  
+- Child Company – Incremental Load (daily)
+
+**File Naming Convention (Incremental):**
+```text
+orders_YYYY_MM_DD.csv
+```
+---------------------------
+### 📄 Sample Raw Order Data
+
+| order_id | customer_id | product_id | order_date  | quantity | gross_price |
+|---------:|-------------|------------|-------------|---------:|------------:|
+| 10001    | C101        | P501       | 2025-09-01  | 2        | 120.50      |
+| 10002    | C104        | P203       | 2025-09-01  | 1        | 75.00       |
+| 10003    | C110        | P509       | 2025-09-01  | 4        | 210.00      |
+
+> Sample shown for illustration only. Actual datasets contain significantly higher volumes.
+---------------------------
+
 **🔄 Data Processing Flow**
 ---------------------------
 
