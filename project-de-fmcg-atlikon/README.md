@@ -1,99 +1,64 @@
-\# 📦 FMCG Data Engineering Pipeline – AtliKon
+# 📦 FMCG Data Engineering Pipeline – AtliKon
 
-\## 📌 Project Overview
+## 📌 Project Overview
+This project implements an **end-to-end data engineering pipeline** for an **FMCG (Fast-Moving Consumer Goods)** business use case.  
+The pipeline integrates data from **parent and child companies**, processes both **full and incremental loads**, and produces **analytics-ready tables** for dashboarding.
 
-This project implements an \*\*end-to-end data engineering pipeline\*\* for an \*\*FMCG (Fast-Moving Consumer Goods)\*\* business use case.
+The solution is designed using **real-world data engineering best practices** such as layered architecture, incremental ingestion, and modular notebook-based processing on **Databricks**.
 
-The pipeline integrates data from \*\*parent and child companies\*\*, processes both \*\*full and incremental loads\*\*, and produces \*\*analytics-ready tables\*\* for dashboarding.
+---
 
-The solution is designed using \*\*real-world data engineering best practices\*\* such as layered architecture, incremental ingestion, and modular notebook-based processing on \*\*Databricks\*\*.
-
-\---
-
-\## 🎯 Business Problem
-
+## 🎯 Business Problem
 AtliKon, an FMCG organization, receives sales, customer, product, and pricing data from multiple operational sources:
 
-\- \*\*Parent Company\*\*: Provides dimension and fact data
-
-\- \*\*Child Company\*\*: Sends daily incremental order data
+- **Parent Company**: Provides dimension and fact data
+- **Child Company**: Sends daily incremental order data
 
 Challenges addressed:
+- Handling **high-volume daily transactional data**
+- Supporting **incremental fact loads**
+- Maintaining **clean, analytics-ready dimensions**
+- Enabling **business dashboards** for decision-making
 
-\- Handling \*\*high-volume daily transactional data\*\*
+---
 
-\- Supporting \*\*incremental fact loads\*\*
+## 🏗️ Architecture Overview
+The pipeline follows a **Bronze → Silver → Gold** layered design:
 
-\- Maintaining \*\*clean, analytics-ready dimensions\*\*
+- **Bronze (Raw)**  
+  - Full load and incremental CSV data from parent & child companies
+- **Silver (Cleaned & Standardized)**  
+  - Validated dimensions and fact tables
+- **Gold (Analytics Layer)**  
+  - Denormalized tables for dashboarding and reporting
 
-\- Enabling \*\*business dashboards\*\* for decision-making
+Architecture and design diagrams are available in the `resources/` folder.
 
-\---
+---
 
-\## 🏗️ Architecture Overview
-
-The pipeline follows a \*\*Bronze → Silver → Gold\*\* layered design:
-
-\- \*\*Bronze (Raw)\*\*
-
-\- Full load and incremental CSV data from parent & child companies
-
-\- \*\*Silver (Cleaned & Standardized)\*\*
-
-\- Validated dimensions and fact tables
-
-\- \*\*Gold (Analytics Layer)\*\*
-
-\- Denormalized tables for dashboarding and reporting
-
-Architecture and design diagrams are available in the \`resources/\` folder.
-
-\---
-
-\## 📂 Project Structure
-
-\`\`\`text
-
+## 📂 Project Structure
+```text
 project-de-fmcg-atlikon
-
-├── 0\_data/ # Raw data (ignored from Git)
-
-├── 1\_codes/
-
-│ ├── 1\_setup/ # Catalog setup, utilities, date dimension
-
-│ ├── 2\_dimension\_data\_processing/
-
-│ │ ├── customers
-
-│ │ ├── products
-
-│ │ └── pricing
-
-│ └── 3\_fact\_data\_processing/
-
-│ ├── full\_load
-
-│ └── incremental\_load
-
-├── 2\_dashboarding/
-
-│ ├── denormalise\_table\_query\_fmcg.txt
-
-│ └── fmcg\_dashboard.pdf
-
+├── 0_data/                  # Raw data (ignored from Git)
+├── 1_codes/
+│   ├── 1_setup/              # Catalog setup, utilities, date dimension
+│   ├── 2_dimension_data_processing/
+│   │   ├── customers
+│   │   ├── products
+│   │   └── pricing
+│   └── 3_fact_data_processing/
+│       ├── full_load
+│       └── incremental_load
+├── 2_dashboarding/
+│   ├── denormalise_table_query_fmcg.txt
+│   └── fmcg_dashboard.pdf
 ├── resources/
-
-│ ├── project\_architecture.png
-
-│ └── databricks\_project.excalidraw
-
+│   ├── project_architecture.png
+│   └── databricks_project.excalidraw
 ├── test/
-
-│ └── test\_data.py
-
+│   └── test_data.py
 └── .gitignore
-
+```
 **🔄 Data Processing Flow**
 ---------------------------
 
