@@ -143,126 +143,84 @@ orders_YYYY_MM_DD.csv
 | 10003    | C110        | P509       | 2025-09-01  | 4        | 210.00      |
 
 > Sample shown for illustration only. Actual datasets contain significantly higher volumes.
----------------------------
+---
 
-**🔄 Data Processing Flow**
----------------------------
+## 🔄 Data Processing Flow
 
-### **1️⃣ Setup Layer**
+### 1️⃣ Setup Layer
+- Catalog and schema initialization
+- Utility functions
+- Date dimension creation
 
-*   Catalog and schema initialization
-    
-*   Utility functions
-    
-*   Date dimension creation
-    
+### 2️⃣ Dimension Processing
+- Customer dimension
+- Product dimension
+- Pricing dimension
+- Data standardization and validation
 
-### **2️⃣ Dimension Processing**
+### 3️⃣ Fact Processing
+- **Full Load**: Historical fact ingestion
+- **Incremental Load**: Daily order data ingestion
+- Handles late-arriving data and updates
 
-*   Customer dimension
-    
-*   Product dimension
-    
-*   Pricing dimension
-    
-*   Data standardization and validation
-    
+### 4️⃣ Analytics & Dashboarding
+- Denormalized fact table creation
+- Business KPIs and metrics
+- Dashboard-ready datasets
 
-### **3️⃣ Fact Processing**
+---
 
-*   **Full Load**: Historical fact ingestion
-    
-*   **Incremental Load**: Daily order data ingestion
-    
-*   Handles late-arriving data and updates
-    
-
-### **4️⃣ Analytics & Dashboarding**
-
-*   Denormalized fact table creation
-    
-*   Business KPIs and metrics
-    
-*   Dashboard-ready datasets
-    
-
-**🧪 Data Validation & Testing**
---------------------------------
+## 🧪 Data Validation & Testing
 
 Basic data quality checks are implemented, including:
+- Null checks
+- Schema validation
+- Record count validation
+- Incremental load consistency
 
-*   Null checks
-    
-*   Schema validation
-    
-*   Record count validation
-    
-*   Incremental load consistency
-    
+Tests are available in the `test/` directory.
 
-Tests are available in the test/ directory.
+---
 
-**📊 Dashboard Output**
------------------------
+## 📊 Dashboard Output
 
 The final dashboard provides insights such as:
+- Daily and monthly sales trends
+- Product-wise revenue
+- Customer-level performance
+- Price impact analysis
 
-*   Daily and monthly sales trends
-    
-*   Product-wise revenue
-    
-*   Customer-level performance
-    
-*   Price impact analysis
-    
+A sample dashboard output is included in `2_dashboarding/fmcg_dashboard.pdf`.
 
-A sample dashboard output is included in 2\_dashboarding/fmcg\_dashboard.pdf.
+---
 
-**🛠️ Tech Stack**
-------------------
+## 🛠️ Tech Stack
+- **Platform**: Databricks
+- **Language**: Python, SQL
+- **Storage Format**: CSV (raw), Delta (processed)
+- **Processing**: Spark
+- **Visualization**: SQL-based dashboards
+- **Version Control**: Git & GitHub
 
-*   **Platform**: Databricks
-    
-*   **Language**: Python, SQL
-    
-*   **Storage Format**: CSV (raw), Delta (processed)
-    
-*   **Processing**: Spark
-    
-*   **Visualization**: SQL-based dashboards
-    
-*   **Version Control**: Git & GitHub
-    
+---
 
-**⚠️ Notes on Data**
---------------------
+## ⚠️ Notes on Data
+- Raw data files are **intentionally excluded** from version control
+- `.gitignore` is used to prevent committing large datasets
+- The repository focuses on **pipeline logic and architecture**
 
-*   Raw data files are **intentionally excluded** from version control
-    
-*   .gitignore is used to prevent committing large datasets
-    
-*   The repository focuses on **pipeline logic and architecture**
-    
+---
 
-**🚀 Key Learnings**
---------------------
+## 🚀 Key Learnings
+- Designing scalable data pipelines
+- Handling incremental fact loads
+- Applying real-world data engineering best practices
+- Structuring Databricks projects professionally
 
-*   Designing scalable data pipelines
-    
-*   Handling incremental fact loads
-    
-*   Applying real-world data engineering best practices
-    
-*   Structuring Databricks projects professionally
-    
+---
 
-**📌 Future Enhancements**
---------------------------
-
-*   Automate pipelines using Databricks Workflows
-    
-*   Add advanced data quality checks (Great Expectations)
-    
-*   Implement Slowly Changing Dimensions (SCD)
-    
-*   Real-time ingestion using Kafka
+## 📌 Future Enhancements
+- Automate pipelines using Databricks Workflows
+- Add advanced data quality checks (Great Expectations)
+- Implement Slowly Changing Dimensions (SCD)
+- Real-time ingestion using Kafka
